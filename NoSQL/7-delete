@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+// my comment 
+
+"""
+This script deletes all documents in the 'school' collection where name = 'Holberton school'.
+"""
+
+from pymongo import MongoClient
+import sys
+import json
+
+def delete_schools(db_name):
+    """
+    Deletes all documents with name='Holberton school' and prints shell-style result.
+    """
+    client = MongoClient('mongodb://127.0.0.1:27017')
+    db = client[db_name]
+    result = db.school.delete_many({"name": "Holberton school"})
+    output = {
+        "acknowledged": result.acknowledged,
+        "deletedCount": result.deleted_count
+    }
+    print(json.dumps(output, separators=(", ", " : ")))
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        sys.exit(1)
+    delete_schools(sys.argv[1])
