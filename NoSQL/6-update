@@ -1,0 +1,29 @@
+// my comment
+#!/usr/bin/env python3
+
+"""
+This module updates all documents in 'school' collection with name='Holberton school'
+by adding an 'address' field.
+"""
+
+from pymongo import MongoClient
+import sys
+
+def update_school_documents(db_name):
+    """
+    Updates all matching documents by setting address = '972 Mission street'.
+    """
+    client = MongoClient('mongodb://127.0.0.1:27017')
+    db = client[db_name]
+    result = db.school.update_many(
+        {"name": "Holberton school"},
+        {"$set": {"address": "972 Mission street"}}
+    )
+    print("WriteResult({ \"nMatched\" : %d, \"nUpserted\" : 0, \"nModified\" : %d })"
+          % (result.matched_count, result.modified_count))
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        sys.exit(1)
+    update_school_documents(sys.argv[1])
+
