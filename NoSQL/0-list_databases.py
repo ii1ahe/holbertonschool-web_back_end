@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""
+Script that lists all databases in a MongoDB instance.
+"""
+
+from pymongo import MongoClient
+
+
+def list_databases():
+    """
+    Connects to MongoDB and prints the names and sizes of all databases.
+    """
+    client = MongoClient('mongodb://127.0.0.1:27017')
+    databases = client.list_database_names()
+    for db_name in databases:
+        db_stats = client[db_name].command("dbstats")
+        size_in_gb = db_stats['storageSize'] / (1024 ** 3)
+        print(f"{db_name:<12} {size_in_gb:.3f}GB")
+
+
+if __name__ == "__main__":
+    list_databases()
