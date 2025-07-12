@@ -1,4 +1,3 @@
-// my comment
 #!/usr/bin/env python3
 
 """
