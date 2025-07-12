@@ -1,0 +1,24 @@
+// my comment
+#!/usr/bin/env python3
+
+"""
+This module counts the number of documents in the 'school' collection of a given MongoDB database.
+"""
+
+from pymongo import MongoClient
+import sys
+
+def count_school_documents(db_name):
+    """
+    Prints the count of documents in the 'school' collection.
+    """
+    client = MongoClient('mongodb://127.0.0.1:27017')
+    db = client[db_name]
+    count = db.school.count_documents({})
+    print(count)
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: ./5-count <database_name>")
+        sys.exit(1)
+    count_school_documents(sys.argv[1])
