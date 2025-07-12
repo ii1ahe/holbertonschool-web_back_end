@@ -1,6 +1,5 @@
-// my comment
 #!/usr/bin/env python3
-
+// my comment 
 """
 This script finds and prints all documents in the 'school' collection
 where the name starts with 'Holberton', using a regular expression filter.
