@@ -1,5 +1,6 @@
+// my comment
 #!/usr/bin/env python3
-# my comment
+ 
 
 """
 This module connects to MongoDB and switches to or creates a database named 'my_db'.
