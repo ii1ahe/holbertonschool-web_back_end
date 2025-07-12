@@ -1,0 +1,28 @@
+// my comment
+#!/usr/bin/env python3
+
+"""
+This script finds and prints all documents in the 'school' collection
+where the name starts with 'Holberton', using a regular expression filter.
+"""
+
+from pymongo import MongoClient
+import sys
+import bson
+
+def find_holberton_named_docs(db_name):
+    """
+    Lists all documents with names starting with 'Holberton' (regex).
+    """
+    client = MongoClient('mongodb://127.0.0.1:27017')
+    db = client[db_name]
+    matches = db.school.find({"name": {"$regex": r"^Holberton", "$options": "i"}})
+
+    for doc in matches:
+        print(doc)
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        sys.exit(1)
+    find_holberton_named_docs(sys.argv[1])
+
